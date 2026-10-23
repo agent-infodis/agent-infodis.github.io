@@ -1,0 +1,5 @@
+# The paper is source material for the webpage, not a deployable artifact.
+paper/
+
+.DS_Store
+

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta
+    name="description"
+    content="Thinking Is Not Telling studies information disclosure in user-service LLM agents."
+  >
+  <meta
+    name="keywords"
+    content="LLM agents, information disclosure, user-agent interaction, tool use"
+  >
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thinking Is Not Telling: Information Disclosure in User-Service LLM Agents</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+  >
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+</head>
+<body>
+  <section class="hero publication-header">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              Thinking Is Not Telling: Information Disclosure in User-Service LLM Agents
+            </h1>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><a href="mailto:jli2947@cs.wisc.edu">Jiatong Li</a><sup>1</sup>,</span>
+              <span class="author-block"><a href="mailto:changdae@cs.wisc.edu">Changdae Oh</a><sup>1</sup>,</span>
+              <span class="author-block"><a href="mailto:froilanchoi@cs.wisc.edu">Hyeong Kyu Choi</a><sup>1</sup>,</span>
+              <span class="author-block"><a href="mailto:jdw@wm.edu">Jindong Wang</a><sup>2</sup>,</span>
+              <span class="author-block"><a href="mailto:sharonli@cs.wisc.edu">Sharon Li</a><sup>1</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors publication-affiliations">
+              <span class="author-block"><sup>1</sup>University of Wisconsin–Madison</span>
+              <span class="author-block"><sup>2</sup>William &amp; Mary</span>
+            </div>
+
+            <div class="publication-venue">Transactions on Machine Learning Research (TMLR), 2026</div>
+
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2602.07796" class="external-link button is-normal is-rounded paper-button">
+                  <span class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M6 2h8l4 4v16H6zM14 2v5h5M9 13h6M9 17h6M9 9h2"/></svg>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2602.07796" class="external-link button is-normal is-rounded paper-button">
+                  <span class="icon" aria-hidden="true">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/deeplearning-wisc/Agent-InfoDis" class="external-link button is-normal is-rounded code-button">
+                  <span class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M8 9 4 12l4 3m8-6 4 3-4 3m-3-8-2 10"/></svg>
+                  </span>
+                  <span>Code</span>
+                  <span class="coming-soon">coming soon</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <figure class="publication-figure teaser-figure">
+          <img
+            src="./static/images/disclosure-case-study.png"
+            alt="A paper example comparing an agent that discloses a cancellation constraint with an enforced-thinking agent that omits it."
+          >
+        </figure>
+        <h2 class="subtitle has-text-centered">
+          Private reasoning can contain the right information while the user-facing response leaves it out.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              User-engaged LLM agents increasingly operate in service scenarios where task success depends
+              on coordination between the agent, the user, and a stateful environment. The agent often has
+              access to task policies, tool results, and environment states that the user cannot observe,
+              making communication central to successful task completion.
+            </p>
+            <p>
+              We study a communication-level failure mode: internal reasoning can be counterproductive for
+              interactive information disclosure. We define information disclosure as the proactive
+              communication of decision-relevant state corrections, options, constraints, consequences, and
+              retrieved environment information. Across five models and three user-service scenarios,
+              enforced thinking has unstable utility, and more thinking does not reliably produce richer
+              user-facing disclosure.
+            </p>
+            <p>
+              Evidence-grounded probing and turn-level counterfactual intervention show that restoring
+              missing decision-relevant information can correct downstream environment-edit actions. A
+              lightweight disclosure-aware prompt also mitigates degradation from enforced thinking. These
+              findings suggest that agents should be optimized not merely to think more, but to communicate
+              the right information at the right decision point.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3 has-text-centered">Information Disclosure</h2>
+          <p class="section-intro has-text-centered">
+            The framework measures five kinds of information an agent may need to disclose before a user decision.
+          </p>
+
+          <div class="disclosure-table" role="table" aria-label="Information disclosure categories">
+            <div class="disclosure-row disclosure-header" role="row">
+              <div role="columnheader">Category</div>
+              <div role="columnheader">Decision-relevant information</div>
+              <div role="columnheader">Example</div>
+            </div>
+            <div class="disclosure-row" role="row">
+              <div role="cell"><strong>State Correction</strong> <span>SC</span></div>
+              <div role="cell">Corrects a factual misunderstanding or false assumption expressed by the user.</div>
+              <div role="cell">“This order was delivered, not cancelled.”</div>
+            </div>
+            <div class="disclosure-row" role="row">
+              <div role="cell"><strong>Option</strong> <span>OP</span></div>
+              <div role="cell">Presents the choices, variants, or paths available for the next decision.</div>
+              <div role="cell">Lists all available replacement options.</div>
+            </div>
+            <div class="disclosure-row" role="row">
+              <div role="cell"><strong>Constraint</strong> <span>CN</span></div>
+              <div role="cell">States policies, eligibility conditions, or limits that affect valid actions.</div>
+              <div role="cell">“Modifications are only possible before shipment.”</div>
+            </div>
+            <div class="disclosure-row" role="row">
+              <div role="cell"><strong>Consequence</strong> <span>CQ</span></div>
+              <div role="cell">Explains financial impact, timing, status changes, or irreversible outcomes.</div>
+              <div role="cell">Refund amount and expected timeline.</div>
+            </div>
+            <div class="disclosure-row" role="row">
+              <div role="cell"><strong>Proactive Retrieval</strong> <span>PR</span></div>
+              <div role="cell">Surfaces useful user-specific information retrieved from tools or databases.</div>
+              <div role="cell">Shows current and new addresses for comparison.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3 has-text-centered">Counterfactual Intervention</h2>
+          <div class="content has-text-justified method-copy">
+            <p>
+              For a failed target trajectory and a matched successful trajectory, the method identifies the
+              last user decision point before the first environment edit. It then finds information that was
+              present in the successful response but absent from the failed response, injects that evidence,
+              and rolls the dialogue forward again.
+            </p>
+          </div>
+          <figure class="publication-figure">
+            <img
+              src="./static/images/counterfactual-pipeline.png"
+              alt="Overview of the counterfactual intervention pipeline."
+            >
+            <figcaption>
+              The intervention restores missing disclosure before the agent's first environment-edit action.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3 has-text-centered">Results</h2>
+
+          <div class="columns result-columns">
+            <div class="column">
+              <div class="content">
+                <h3 class="title is-4">Thinking does not reliably scale communication</h3>
+                <p>
+                  Increasing internal think effort does not consistently improve task success or increase
+                  user-visible response length across models and service scenarios.
+                </p>
+                <figure class="publication-figure compact-figure">
+                  <img
+                    src="./static/images/response-scaling.png"
+                    alt="Plots comparing task reliability and response length under different thinking efforts."
+                  >
+                </figure>
+              </div>
+            </div>
+
+            <div class="column">
+              <div class="content">
+                <h3 class="title is-4">Missing disclosure changes actions</h3>
+                <p>
+                  Injecting golden decision-relevant information reaches an 11.74% micro-averaged First Edit
+                  Correction Rate, compared with 6.08% for added verbosity and 6.50% for failed think content.
+                </p>
+                <figure class="publication-figure compact-figure">
+                  <img
+                    src="./static/images/disclosure-frequency.png"
+                    alt="Frequency of intervention across the five information disclosure dimensions."
+                  >
+                </figure>
+              </div>
+            </div>
+          </div>
+
+          <div class="counterfactual-results">
+            <h3 class="title is-4 has-text-centered">Counterfactual intervention results</h3>
+            <div class="content has-text-justified result-overview">
+              <p>
+                Table 4 reports the intervention results for each model and domain. Injecting missing golden
+                information improves the first environment edit more consistently than simply increasing
+                verbosity or exposing think content from the failed trajectory. Golden think content can be
+                stronger, but it must first be obtained from a separately successful run.
+              </p>
+            </div>
+
+            <div class="result-summary" aria-label="Key micro-averaged intervention results from Table 5">
+              <div><strong>11.74%</strong><span>Golden Info FECR</span></div>
+              <div><strong>16.35%</strong><span>Golden Think FECR</span></div>
+              <div><strong>25.55%</strong><span>Golden Think recovery rate</span></div>
+            </div>
+
+            <figure class="publication-figure result-table-figure">
+              <img
+                src="./static/images/counterfactual-results-table4.png"
+                alt="Table 4 showing first edit correction and recovery rates for four counterfactual interventions across models and domains."
+              >
+              <figcaption>
+                Table 4. Golden information and golden think content produce the strongest corrections across
+                most model–domain settings.
+              </figcaption>
+            </figure>
+
+            <div class="columns result-artifacts">
+              <div class="column">
+                <figure class="publication-figure">
+                  <img
+                    src="./static/images/counterfactual-results-tables5-6.png"
+                    alt="Tables 5 and 6 showing micro-averaged intervention effects and trials needed to obtain a successful reasoning trajectory."
+                  >
+                  <figcaption>
+                    Tables 5–6. Targeted disclosure improves micro-averaged FECR; obtaining golden think
+                    content requires more than one trial in 16.67–37.50% of settings.
+                  </figcaption>
+                </figure>
+              </div>
+              <div class="column">
+                <figure class="publication-figure figure-four">
+                  <img
+                    src="./static/images/counterfactual-results-figure4.png"
+                    alt="Figure 4 comparing first edit correction rates across intervention types, models, and domains."
+                  >
+                  <figcaption>
+                    Figure 4. The advantage of targeted information is visible across both model and domain
+                    aggregations, with the largest gains from successful golden reasoning.
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+
+          <div class="columns is-centered prompt-result">
+            <div class="column is-four-fifths">
+              <h3 class="title is-4 has-text-centered">Disclosure-aware prompting</h3>
+              <div class="content has-text-justified">
+                <p>
+                  A lightweight prompt that asks agents to disclose decision-relevant information improves
+                  micro-averaged pass@1 by 5.26 points for GPT-4o and 3.44 points for DeepSeek-V3.1 when the
+                  think tool is enforced.
+                </p>
+              </div>
+              <figure class="publication-figure">
+                <img
+                  src="./static/images/prompt-results-table.png"
+                  alt="Table comparing baseline, proactive chain-of-thought, and information-disclosure prompting."
+                >
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section conclusion-section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Conclusion</h2>
+          <div class="content has-text-justified">
+            <p>
+              Raw internal thinking is not equivalent to effective user-facing communication. Information
+              disclosure provides an interpretable way to diagnose a meaningful subset of agent failures and
+              a practical target for improving user-service agents: convert environment information into
+              timely, public, decision-relevant disclosure.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title is-3">BibTeX</h2>
+      <pre><code>@article{li2026thinkingmakesllmagents,
+    title={Thinking Is Not Telling: Information Disclosure in User-Service LLM Agents}, 
+    author={Jiatong Li and Changdae Oh and Hyeong Kyu Choi and Jindong Wang and Sharon Li},
+    year={2026},
+    journal={arXiv preprint arXiv:2602.07796},
+}</code></pre>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content has-text-centered">
+            <p>
+              Website template adapted from
+              <a href="https://nerfies.github.io/">Nerfies</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+
